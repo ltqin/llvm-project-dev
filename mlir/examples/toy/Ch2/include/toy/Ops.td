@@ -248,7 +248,7 @@ def TransposeOp : Toy_Op<"transpose"> {
 def MyAndOp : Toy_Op<"myand">{
   let summary = "element-wise add(&) operation";
   let description = [{
-    The "letao" operation performs element-wise add(&) between two tensors.
+    The "myand" operation performs element-wise add(&) between two tensors.
     The shapes of the tensor operands are expected to match.
   }];
 
@@ -263,5 +263,27 @@ def MyAndOp : Toy_Op<"myand">{
   let builders = [
     OpBuilderDAG<(ins "Value":$lhs, "Value":$rhs)>
   ]; 
+}
+def MultiAddOp : Toy_Op<"multiadd">{
+  let summary = "element-wise add operation";
+  let description = [{
+    The "multiadd" operation performs element-wise add(&) between two tensors.
+    The shapes of the tensor operands are expected to match.
+  }];
+
+  let arguments = (ins Variadic<F64Tensor>:$inputs);
+  let results = (outs F64Tensor);
+
+  // Specify a parser and printer method.
+  let parser = [{ return ::parseBinaryOp(parser, result); }];
+  let printer = [{ return ::printBinaryOp(p, *this); }];
+
+  // Allow building an MyAnd with from the two input operands.
+  let builders = [
+    OpBuilderDAG<(ins "ArrayRef<Value>":$arguments)>
+  ]; 
+
+  // Invoke a static verify method to verify this  operation.
+  let verifier = [{ return ::verify(*this); }];
 }
 #endif // TOY_OPS

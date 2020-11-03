@@ -156,6 +156,10 @@ static mlir::LogicalResult verify(ConstantOp op) {
   return mlir::success();
 }
 
+
+static mlir::LogicalResult verify(MultiAddOp op) {
+  return mlir::success();
+}
 //===----------------------------------------------------------------------===//
 // AddOp
 
@@ -176,6 +180,15 @@ void MyAndOp::build(mlir::OpBuilder &builder, mlir::OperationState &state,
 }
 
 //===----------------------------------------------------------------------===//
+
+// MultiAddOp
+void MultiAddOp::build(mlir::OpBuilder &builder, mlir::OperationState &state,
+                       ArrayRef<mlir::Value> arguments) {
+  state.addTypes(UnrankedTensorType::get(builder.getF64Type()));
+  state.addOperands(arguments);
+}
+//===----------------------------------------------------------------------===//
+
 // GenericCallOp
 
 void GenericCallOp::build(mlir::OpBuilder &builder, mlir::OperationState &state,

@@ -274,6 +274,9 @@ def MultiAddOp : Toy_Op<"multiadd">{
   let arguments = (ins Variadic<F64Tensor>:$inputs);
   let results = (outs F64Tensor);
 
+  let assemblyFormat = [{
+    `(` $inputs `:` type($inputs) `)` attr-dict `to` type(results)
+  }];
   // Specify a parser and printer method.
   let parser = [{ return ::parseBinaryOp(parser, result); }];
   let printer = [{ return ::printBinaryOp(p, *this); }];

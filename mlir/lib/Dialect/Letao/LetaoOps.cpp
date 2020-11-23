@@ -99,7 +99,6 @@ static ParseResult parseMovePosOp(OpAsmParser &parser, OperationState &result) {
 static void print(OpAsmPrinter &p, MovePosOp op) {
   p << op.getOperationName() << "(" << op.getOperands() << ")";
   p << " : " << op.getOperands()[0].getType();
-  //p << " : " << op.getOperandTypes();
 }
 
 static LogicalResult verify(MovePosOp op) {
@@ -111,6 +110,34 @@ static LogicalResult verify(MovePosOp op) {
 }
 
 
+//===----------------------------------------------------------------------===//
+// MultiAddOp
+//===----------------------------------------------------------------------===//
+
+static ParseResult parseMultiAddOp(OpAsmParser &parser, OperationState &result) {
+  SmallVector<OpAsmParser::OperandType, 3> ops;
+  SmallVector<Type, 3> types;
+
+  auto ret = parser.parseOperandList(ops, OpAsmParser::Delimiter::Paren) ||
+             parser.parseColonTypeList(types)||
+             parser.resolveOperands(ops, types, parser.getNameLoc(), result.operands);
+
+  return failure(ret);
+}
+
+static void print(OpAsmPrinter &p, MultiAddOp op) {
+  p << op.getOperationName() << "(" << op.getOperands() << ")";
+  p << " : " << op.getOperandTypes();
+}
+
+static LogicalResult verify(MultiAddOp op) {
+  auto operands = op.getOperands();
+  if(operands.size() < 2)
+    return success(false);
+  
+  
+  return success();
+}
 
 namespace mlir{
 //===----------------------------------------------------------------------===//

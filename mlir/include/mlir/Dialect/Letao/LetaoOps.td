@@ -60,5 +60,14 @@ def letao_MovePosOp:
       The `miopen.fill` op adds values to indices within the memref.
     }];
 }
+
+def leto_MultiAddOp:
+Letao_Op<"multiadd">,
+    Arguments<(ins Variadic<I32>:$inputs)> {
+    let summary = "Add values to indices within the memref.";
+    let description = [{
+      The `letao.multiadd` op adds values to indices within the memref.
+    }];
+}
 #endif
 

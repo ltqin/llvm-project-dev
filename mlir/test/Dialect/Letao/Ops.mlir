@@ -31,3 +31,15 @@ func @letao_movepos(%buffer_f32 : memref<2xf32, 5>, %buffer_i32 : memref<2xi32, 
 // CHECK-LABEL: func @letao_movepos
 //   CHECK: letao.movepos
 //   CHECK: letao.movepos
+
+func @test_multiadd() {
+  %input1 = constant 1 : i32
+  %input2 = constant 2 : i32
+  %input3 = constant 3 : i32
+  %input4 = constant 4 : i32
+  letao.multiadd(%input1, %input2, %input3, %input4) : i32, i32, i32, i32
+  return
+}
+
+// CHECK-LABEL: func @test_multiadd
+//   CHECK: letao.multiadd

@@ -12,6 +12,7 @@
 #include "mlir/Dialect/StandardOps/IR/Ops.h"
 #include "mlir/IR/Matchers.h"
 #include "mlir/IR/StandardTypes.h"
+#include "llvm/Support/raw_ostream.h"
 
 
 using namespace mlir;
@@ -26,7 +27,12 @@ struct MultAddTransToAdds : public MultAddTransToAddsBase<MultAddTransToAdds> {
 
 
 void MultAddTransToAdds::runOnFunction() {
-  
+  FuncOp func = getFunction();
+
+  func.walk([&](letao::MultiAddOp op) {
+      //llvm::errs() << "Hello: ";
+      //llvm::errs().write_escaped(op.getName()) << '\n';
+  });
 }
 
 std::unique_ptr<OperationPass<FuncOp>> mlir::letao::createMultiAddTransPass() {

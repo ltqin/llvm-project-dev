@@ -25,6 +25,7 @@
 #include "mlir/Dialect/Shape/Transforms/Passes.h"
 #include "mlir/Dialect/StandardOps/Transforms/Passes.h"
 #include "mlir/Transforms/Passes.h"
+#include "mlir/Dialect/Letao/Passes.h"
 
 #include <cstdlib>
 
@@ -54,6 +55,8 @@ inline void registerAllPasses() {
   registerShapePasses();
   spirv::registerSPIRVPasses();
   registerStandardPasses();
+
+  letao::registerLetaoPasses();
 }
 
 } // namespace mlir

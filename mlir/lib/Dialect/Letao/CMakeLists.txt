@@ -1,4 +1,4 @@
-file(GLOB globbed *.c *.cpp)
+file(GLOB globbed *.c *.cpp Transforms/*.cpp)
 add_mlir_dialect_library(MLIRLetaoOps
   ${globbed}
 
@@ -12,5 +12,6 @@ add_mlir_dialect_library(MLIRLetaoOps
 target_link_libraries(MLIRLetaoOps
   PUBLIC
   MLIRIR
+  MLIRPass
   LLVMSupport
   )

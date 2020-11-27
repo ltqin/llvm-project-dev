@@ -70,6 +70,12 @@ if(LLVM_BUILD_EXAMPLES)
     )
 endif()
 
+if(MLIR_LETAO_DRIVER_ENABLED)
+  list(APPEND MLIR_TEST_DEPENDS
+    mlir-letao-driver
+  )
+endif()
+
 if(MLIR_CUDA_RUNNER_ENABLED)
   list(APPEND MLIR_TEST_DEPENDS
     mlir-cuda-runner

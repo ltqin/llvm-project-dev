@@ -15,7 +15,6 @@ target_link_libraries(mlir-letao-driver PRIVATE
   MLIREDSC
   MLIRExecutionEngine
   MLIRIR
-  MLIRJitRunner
   MLIRLLVMIR
   MLIRParser
   MLIRTargetLLVMIR

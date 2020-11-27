@@ -32,7 +32,6 @@ void MultAddTransToAdds::runOnFunction() {
     // llvm::errs().write_escaped(op.getName()) << '\n';
     auto loc = op.getLoc();
     auto operands = op.getOperands();
-    auto type = op.getOperand(0).getType();
 
     OpBuilder b(op.getOperation());
     Value add = b.create<AddIOp>(loc, op.getOperand(0), op.getOperand(1));
